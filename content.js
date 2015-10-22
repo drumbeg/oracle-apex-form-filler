@@ -29,6 +29,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, response) {
       $selection = $('.radio_group input[type="radio"][value="' + request.action + '"]:visible');
       $selection.prop('checked', true);
       break;
+   case 'cb':
+      $selection = $('input[type="checkbox"]:visible');
+      $selection.prop('checked', !$selection.prop("checked"));
+      break;
+   case 'lsl':
+      $selection = $('select:visible option:last-child');
+      $($selection).prop("selected", true);
+      break;
    case 'clear':
       $selection = $('textarea:visible, input[type="text"]:visible, .datepicker:visible');
       $selection.val('');
