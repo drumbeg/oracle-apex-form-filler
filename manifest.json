@@ -4,7 +4,7 @@
    "name": "Oracle APEX Form Filler",
    "short_name": "Oracle APEX Form Filler",
    "description": "Use to fill out long winded APEX pages with test data",
-   "version": "1.2",
+   "version": "1.2.1",
 
    "browser_action": {
       "default_icon": "apex.png",
