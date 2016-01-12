@@ -23,8 +23,9 @@ var inputHandler = function (selector, context) {
 chrome.runtime.onMessage.addListener(function (request, sender, response) {
    console.log('Method Received ' + request.method);
 
-   var isDialogOpen = $('.ui-dialog').length > 0;
-   var rootSelector = isDialogOpen ? $('.ui-dialog').find('iframe').contents() : $(document);
+   $selection = $();
+   var isDialogOpen = $('.ui-dialog:visible').length > 0;
+   var rootSelector = isDialogOpen ? $('.ui-dialog:visible').find('iframe').contents() : $(document);
 
    switch (request.method) {
    case 'ta':
@@ -36,12 +37,20 @@ chrome.runtime.onMessage.addListener(function (request, sender, response) {
       inputHandler('input[type="text"]:not(.datepicker):visible', rootSelector);
       break;
    case 'df':
-      $selection = $('.datepicker:visible'), rootSelector;
+      $selection = $('.datepicker:visible', rootSelector);
       $selection.val(moment().format('DD-MMM-YYYY'));
       break;
    case 'rb':
       $selection = $('.radio_group input[type="radio"][value="' + request.action + '"]:visible', rootSelector);
       $selection.prop('checked', true);
+      break;
+   case 'cb':
+      $selection = $('input[type="checkbox"]:visible', rootSelector);
+      $selection.prop('checked', !$selection.prop("checked"));
+      break;
+   case 'lsl':
+      $selection = $('select:visible option:last-child', rootSelector);
+      $($selection).prop("selected", true);
       break;
    case 'clear':
       $selection = $('textarea:visible, input[type="text"]:visible, .datepicker:visible', rootSelector);
