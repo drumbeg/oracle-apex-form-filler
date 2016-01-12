@@ -41,7 +41,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, response) {
       $selection.val(moment().format('DD-MMM-YYYY'));
       break;
    case 'rb':
-      $selection = $('.radio_group input[type="radio"][value="' + request.action + '"]:visible', rootSelector);
+      $selection = $('.radio_group input[type="radio"]:visible:' + request.action, rootSelector);
       $selection.prop('checked', true);
       break;
    case 'cb':
