@@ -8,6 +8,9 @@
    "browser_action": {
       "default_icon": "apex.png"
    },
+   "icons": {
+      "16": "apex.png"
+   },
    "background": {
       "scripts": ["background.js"]
    },

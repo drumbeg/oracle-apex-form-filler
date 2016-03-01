@@ -7,20 +7,16 @@ function populatePage (methodName, action) {
    });
 }
 
-chrome.browserAction.onClicked.addListener(function(tab) {
-   populatePage('fill');
-});
-
 chrome.contextMenus.create({
    "id": "clear",
-   "title": "Clear All",
-   "contexts": ["all"]
+   "title": "Clear Fields",
+   "contexts": ["page", "editable", "link"]
 });
 
 chrome.contextMenus.create({
    "id": "fill",
    "title": "Fill Page",
-   "contexts": ["all"]
+   "contexts": ["page", "editable", "link"]
 });
 
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
