@@ -28,38 +28,30 @@ chrome.runtime.onMessage.addListener(function (request, sender, response) {
    var rootSelector = isDialogOpen ? $('.ui-dialog:visible').find('iframe').contents() : $(document);
 
    switch (request.method) {
-   case 'ta':
-   debugger;
+      case 'clear':
+         $selection = $('textarea:visible, input[type="text"]:visible, .datepicker:visible', rootSelector);
+         $selection.val('');
+         $selection = $selection.add('iframe', 'textarea.rich_text_editor');
+         $('iframe', 'textarea.rich_text_editor').contents().find('body').html('');
+         break;
+      default:
+   // ta:
       inputHandler('textarea:visible', rootSelector);
       richTextHandler(rootSelector);
-      break;
-   case 'tf':
+   // tf:
       inputHandler('input[type="text"]:not(.datepicker):visible', rootSelector);
-      break;
-   case 'df':
+   // df:
       $selection = $('.datepicker:visible', rootSelector);
       $selection.val(moment().format('DD-MMM-YYYY'));
-      break;
-   case 'rb':
-      $selection = $('.radio_group input[type="radio"]:visible:' + request.action, rootSelector);
+   // rb:
+      $selection = $('.radio_group input[type="radio"]:visible:first', rootSelector);
       $selection.prop('checked', true);
-      break;
-   case 'cb':
+   // cb:
       $selection = $('input[type="checkbox"]:visible', rootSelector);
       $selection.prop('checked', !$selection.prop("checked"));
-      break;
-   case 'lsl':
+   // lsl:
       $selection = $('select:visible option:last-child', rootSelector);
       $($selection).prop("selected", true);
-      break;
-   case 'clear':
-      $selection = $('textarea:visible, input[type="text"]:visible, .datepicker:visible', rootSelector);
-      $selection.val('');
-      $selection = $selection.add('iframe', 'textarea.rich_text_editor');
-      $('iframe', 'textarea.rich_text_editor').contents().find('body').html('');
-      break;
-   default:
-      console.log(request.method + ' not supported');
    }
 
    if ($selection.length === 0) {

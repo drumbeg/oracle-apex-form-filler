@@ -4,18 +4,25 @@
    "name": "Oracle APEX Form Filler",
    "short_name": "Oracle APEX Form Filler",
    "description": "Use to fill out long winded APEX pages with test data",
-   "version": "1.2.1",
-
+   "version": "1.3.0",
    "browser_action": {
-      "default_icon": "apex.png",
-      "default_popup": "popup.html"
+      "default_icon": "apex.png"
+   },
+   "background": {
+      "scripts": ["background.js"]
    },
    "content_scripts": [{
-    "js": ["moment.min.js", "jquery.min.js", "content.js"],
-    "run_at": "document_end",
-    "matches": ["<all_urls>"]
+      "js": [
+         "moment.min.js",
+         "jquery.min.js",
+         "content.js"
+      ],
+      "run_at": "document_end",
+      "matches": ["<all_urls>"]
   }],
   "permissions": [
-    "notifications"
+      "tabs",
+      "notifications",
+      "contextMenus"
   ]
 }
