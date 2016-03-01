@@ -7,13 +7,9 @@ function populatePage (methodName, action) {
    });
 }
 
-chrome.browserAction.onClicked.addListener(function(tab) {
-   populatePage('fill');
-});
-
 chrome.contextMenus.create({
    "id": "clear",
-   "title": "Clear All",
+   "title": "Clear Fields",
    "contexts": ["all"]
 });
 
